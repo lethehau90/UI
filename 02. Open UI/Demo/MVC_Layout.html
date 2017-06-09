@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta charset="UTF-8">
+	<title>SAPUI5 Walkthrough</title>
+	
+	<script
+		id="sap-ui-bootstrap"
+		type="text/javascript"
+		src='https://openui5.hana.ondemand.com/resources/sap-ui-core.js'
+		data-sap-ui-theme="sap_bluecrystal"
+		data-sap-ui-libs="sap.ui.commons,sap.ui.ux3">
+	</script>
+	<script >
+		sap.ui.localResources("mvcexample");
+		//JS View
+		sap.ui.jsview("mvcexample.jsview",{
+		getControllerName: function(){
+		return "mvcexample.jsview";
+		},
+		createContent: function(oController){
+		//Create a matrix layout with 2 columns
+var oMatrix = new sap.ui.commons.layout.MatrixLayout({layoutFixed: true, width: '300px', columns: 2});
+oMatrix.setWidths('100px', '200px');
+
+//Create a header
+var oCell = new sap.ui.commons.layout.MatrixLayoutCell({colSpan: 2});
+oCell.addContent(new sap.ui.commons.TextView({text: 'Contact Data', design: sap.ui.commons.TextViewDesign.H1}));
+oMatrix.createRow(oCell);
+
+//Create a form
+var oLabel = new sap.ui.commons.Label({ id:'inputName', text: 'Name'});
+var oInput = new sap.ui.commons.TextField({value: 'Mustermann', width: '100%'});
+oLabel.setLabelFor(oInput);
+oMatrix.createRow(oLabel, oInput);
+
+oLabel = new sap.ui.commons.Label({text: 'First Name'});
+oInput = new sap.ui.commons.TextField({value: 'Max', width: '100%'});
+oLabel.setLabelFor(oInput);
+oMatrix.createRow(oLabel, oInput);
+
+//Create a standard divider
+var oCell = new sap.ui.commons.layout.MatrixLayoutCell({colSpan: 2});
+oCell.addContent(new sap.ui.commons.HorizontalDivider());
+oMatrix.createRow(oCell);
+
+//Create a button row
+var oCell = new sap.ui.commons.layout.MatrixLayoutCell({colSpan: 2});
+var oButton = new sap.ui.commons.Button({
+id:"jsview_btn",
+			text:"JS View Button",
+			press: function(oEvent){
+			alert("JS view Button pressed!");
+			}
+});
+oButton.addStyleClass("CustomMargin"); //Add some additional left margin
+oCell.addContent(oButton);
+oButton = new sap.ui.commons.Button({text: 'Cancel'});
+oCell.addContent(oButton);
+oMatrix.createRow(oCell);
+		 return oMatrix;
+		 }
+		 });
+		 
+		 
+		 
+		 
+		 // JS View Controller
+		 sap.ui.controller("mvcexample.jsview",{});
+		 //Placement in UI Area
+		 var myview= sap.ui.view({
+		 id:"js1",
+		 viewName:"mvcexample.jsview",
+		 type:sap.ui.core.mvc.ViewType.JS
+		 });
+		 myview.placeAt("content");
+	</script>
+</head>
+<body class="sapUiBody" >
+<div id="content"> </div>
+</body>

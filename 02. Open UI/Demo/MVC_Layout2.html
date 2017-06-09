@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta charset="UTF-8">
+	<title>SAPUI5 Walkthrough</title>
+	
+	<script
+		id="sap-ui-bootstrap"
+		type="text/javascript"
+		src='https://openui5.hana.ondemand.com/resources/sap-ui-core.js'
+		data-sap-ui-theme="sap_bluecrystal"
+		data-sap-ui-libs="sap.ui.commons,sap.ui.ux3">
+	</script>
+	<script >
+		sap.ui.localResources("mvcexample");
+		//JS View
+		sap.ui.jsview("mvcexample.jsview",{
+		getControllerName: function(){
+		return "mvcexample.jsview";
+		},
+		createContent: function(oController){
+		var oSplitterV = new sap.ui.commons.Splitter("splitterV");
+		oSplitterV.setSplitterOrientation(sap.ui.commons.Orientation.vertical);
+		oSplitterV.setSplitterPosition("50%");
+		oSplitterV.setMinSizeFirstPane("20%");
+		oSplitterV.setMinSizeSecondPane("30%");
+		oSplitterV.setWidth("100%");
+		oSplitterV.setHeight("200px");
+		//
+		var oMatrix = new sap.ui.commons.layout.MatrixLayout({layoutFixed: true, width: '300px', columns: 2});
+oMatrix.setWidths('100px', '200px');
+var oCell = new sap.ui.commons.layout.MatrixLayoutCell({colSpan: 2});
+oCell.addContent(new sap.ui.commons.TextView({text: 'Contact Data', design: sap.ui.commons.TextViewDesign.H1}));
+oMatrix.createRow(oCell);
+		//adding Labels to both panes
+		var oLabel = new sap.ui.commons.Label({text: 'Name'});
+var oInput = new sap.ui.commons.TextField({value: 'Mustermann', width: '100%'});
+oLabel.setLabelFor(oInput);
+oMatrix.createRow(oLabel, oInput);
+		oSplitterV.addFirstPaneContent(oMatrix);
+		var oLabel2 = new sap.ui.commons.Label({text: "Second Pane"});
+		oSplitterV.addSecondPaneContent(oLabel2);
+		 return oSplitterV;
+		 }
+		 });
+		 
+		 
+		 
+		 
+		 // JS View Controller
+		 sap.ui.controller("mvcexample.jsview",{});
+		 //Placement in UI Area
+		 var myview= sap.ui.view({
+		 id:"js1",
+		 viewName:"mvcexample.jsview",
+		 type:sap.ui.core.mvc.ViewType.JS
+		 });
+		 myview.placeAt("content");
+	</script>
+</head>
+<body class="sapUiBody" >
+<div id="content"> </div>
+</body>

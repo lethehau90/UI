@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta charset="UTF-8">
+	<title>SAPUI5 Walkthrough</title>
+	
+	<script
+		id="sap-ui-bootstrap"
+		type="text/javascript"
+		src='https://openui5.hana.ondemand.com/resources/sap-ui-core.js'
+		data-sap-ui-theme="sap_bluecrystal"
+		data-sap-ui-libs="sap.ui.commons,sap.ui.ux3">
+	</script>
+	<script >
+		sap.ui.localResources("mvcexample");
+		//JS View
+		sap.ui.jsview("mvcexample.jsview",{
+		getControllerName: function(){
+		return "mvcexample.jsview";
+		},
+		createContent: function(oController){
+		var oPanel = new sap.ui.commons.Panel({width: "auto"});
+			var oButton= new sap.ui.commons.Button({
+			id:"jsview_btn",
+			text:"JS View Button",
+			press: function(oEvent){
+			alert("JS view Button pressed!");
+			}
+		 });
+		 
+		 var oButton1= new sap.ui.commons.Button({
+			id:"jsview_btn1",
+			text:"JS View Button2",
+			press: function(oEvent){
+			alert("JS view Button pressed!");
+			}
+		 });
+		
+		 //listbox
+		 var oComboBox1 = new sap.ui.commons.ComboBox("ComboBox1");
+oComboBox1.setTooltip("Country");
+oComboBox1.setEditable(true);
+oComboBox1.setValue("Deutschland");
+oComboBox1.setWidth("200px");
+var oItem = new sap.ui.core.ListItem("Country1");
+oItem.setText("Canada");
+oComboBox1.addItem(oItem);
+oItem = new sap.ui.core.ListItem("Country2");
+oItem.setText("Deutschland");
+oComboBox1.addItem(oItem);
+oItem = new sap.ui.core.ListItem("Country3");
+oItem.setText("England");
+oComboBox1.addItem(oItem);
+oItem = new sap.ui.core.ListItem("Country4");
+oItem.setText("Россия");
+oComboBox1.addItem(oItem);
+		 //end listbox
+		 //Lable
+		 var oLabel = new sap.ui.commons.Label("l2");
+		oLabel.setText("Phân loại: ");
+		oLabel.setDesign(sap.ui.commons.LabelDesign.Bold);
+		 //end lable
+		  oPanel.addContent(oLabel);
+		  oPanel.addContent(oComboBox1);
+		 return oPanel;
+		 }
+		 });
+		 // JS View Controller
+		 sap.ui.controller("mvcexample.jsview",{});
+		 //Placement in UI Area
+		 var myview= sap.ui.view({
+		 id:"js1",
+		 viewName:"mvcexample.jsview",
+		 type:sap.ui.core.mvc.ViewType.JS
+		 });
+		 myview.placeAt("content");
+	</script>
+</head>
+<body class="sapUiBody" >
+<div id="content"> </div>
+</body>
